@@ -1,4 +1,4 @@
-package mk.ukim.finki.backend.models;
+package mk.ukim.finki.backend.models.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 

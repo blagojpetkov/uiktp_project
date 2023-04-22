@@ -1,18 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #b58dd6;
+        }
+        .card {
+            margin-top: 150px;
+            margin-bottom: 150px;
+        }
+        .card-header {
+            background-color: #9b62c6;
+            color: white;
+        }
+        .btn-purple {
+            background-color: #9b62c6;
+            color: white;
+        }
+        .btn-purple:hover {
+            background-color: #8651ac;
+            color: white;
+        }
+        .form-control {
+            border-color: #9b62c6;
+        }
+        .form-control:focus {
+            border-color: #8651ac;
+            box-shadow: none;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-<form action="/login" method="POST">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username">
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password">
-
-    <input type="submit" value="Log in">
-</form>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Login</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/login">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-block btn-purple">Login</button>
+                    </form>
+                    <div th:if="${param.error}" class="error-message">Invalid username or password.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,36 +1,46 @@
 package mk.ukim.finki.backend.web;
 
-import mk.ukim.finki.backend.models.User;
-import mk.ukim.finki.backend.repository.UserRepository;
+import mk.ukim.finki.backend.models.Course;
+import mk.ukim.finki.backend.repository.CourseRepository;
 import mk.ukim.finki.backend.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-@RestController
-@RequestMapping("/hello")
+@Controller
+@RequestMapping("/courses")
 public class CourseController {
-    private final UserRepository userRepository;
     private final UserService userService;
+    private final CourseRepository courseRepository;
 
-    public CourseController(UserRepository userRepository, UserService userService) {
-        this.userRepository = userRepository;
+    public CourseController(UserService userService, CourseRepository courseRepository) {
         this.userService = userService;
+        this.courseRepository = courseRepository;
     }
 
-    @RequestMapping("/test")
-    public String test(){
-        userRepository.save(new User("username123", "password", "firstname", "lastname"));
-        return "helloworld";
+    @GetMapping("/add_course")
+    public String addCourse(){
+        return "add_course";
     }
 
-    @PostMapping("/register")
-    public String register(@RequestParam String username,
-                           @RequestParam String password,
-                           @RequestParam String firstName,
-                           @RequestParam String lastName){
-        return userService.register(firstName, lastName, username, password, password).toString();
-
+    @PostMapping("/add_course")
+    public String addCourse(@RequestParam String name, @RequestParam String description, @RequestParam String category, @RequestParam MultipartFile image){
+        courseRepository.save(new Course(name, description, category, image));
+        return "home";
     }
+
+    @GetMapping("/{id}/image")
+    public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
+        Course course = courseRepository.findById(id).orElseThrow();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+
+        return new ResponseEntity<>(course.getImage(), headers, HttpStatus.OK);
+    }
+
 }

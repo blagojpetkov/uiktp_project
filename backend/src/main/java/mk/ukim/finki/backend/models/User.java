@@ -1,6 +1,7 @@
 package mk.ukim.finki.backend.models;
 
 import lombok.Data;
+import mk.ukim.finki.backend.models.enums.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

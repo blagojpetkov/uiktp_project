@@ -1,17 +1,12 @@
 package mk.ukim.finki.backend.models;
 
-
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
-
 @Entity
 @Data
-public class Enrollment {
+public class Review {
     @Id
     @GeneratedValue
     private Long id;
@@ -19,6 +14,8 @@ public class Enrollment {
     private User user;
     @ManyToOne
     private Course course;
-    private Date enrollmentDate;
+    private int grade;
+    private String text;
+    private Date reviewDate;
 
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Course</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2 class="text-center mb-4">Create Course</h2>
+            <form action="/courses/add_course" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control form-control-lg" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea class="form-control form-control-lg" id="description" name="description" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <input type="text" class="form-control form-control-lg" id="category" name="category" required>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image:</label>
+                    <input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary btn-lg mr-3">Submit</button>
+                    <button type="button" class="btn btn-secondary btn-lg" onclick="clearForm()">Clear Form</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function clearForm() {
+        document.getElementById("name").value = "";
+        document.getElementById("description").value = "";
+        document.getElementById("image").value = "";
+    }
+</script>
+</body>
+</html>ss
