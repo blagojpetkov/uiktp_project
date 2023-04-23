@@ -26,7 +26,7 @@ public class CustomUsernamePasswordAuthenticationProvider implements Authenticat
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        if ("".equals(username) || "".equals(password)) {
+        if (username.isEmpty() || password.isEmpty()) {
             throw new BadCredentialsException("Invalid Credentials");
         }
 
