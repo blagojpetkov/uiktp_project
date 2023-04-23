@@ -1,9 +1,9 @@
 package mk.ukim.finki.backend.models;
 
-import javax.persistence.*;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,23 +11,30 @@ import java.util.List;
 @Entity
 @Data
 public class Course {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String description;
+
     @ManyToOne
     private User instructor;
+
     @OneToMany(mappedBy = "course")
     private List<Enrollment> enrollments = new ArrayList<>();
 
-    //Defines the category of the course, e.g. Data Science, Android, Angular, React
+    // Defines the category of the course, e.g. Data Science, Android, Angular, React
     private String category;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Lesson> lessons = new ArrayList<>();
 
-    //Image for the course
+    @ManyToMany(mappedBy = "courses")
+    private List<ShoppingCart> shoppingCarts = new ArrayList<>();
+
+    // Image for the course
     @Lob
     @Column(nullable = false)
     private byte[] image;
@@ -46,4 +53,5 @@ public class Course {
     public Course() {
 
     }
+
 }
