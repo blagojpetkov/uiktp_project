@@ -2,6 +2,7 @@ package mk.ukim.finki.backend.models;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import java.util.Date;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Enrollment {
     @Id
     @GeneratedValue
@@ -21,4 +23,9 @@ public class Enrollment {
     private Course course;
     private Date enrollmentDate;
 
+    public Enrollment(User user, Course course, Date enrollmentDate) {
+        this.user = user;
+        this.course = course;
+        this.enrollmentDate = enrollmentDate;
+    }
 }
