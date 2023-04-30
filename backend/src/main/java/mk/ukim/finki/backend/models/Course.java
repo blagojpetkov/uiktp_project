@@ -25,6 +25,7 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<Enrollment> enrollments = new ArrayList<>();
 
+    // TODO turn this into an enum or separate table
     // Defines the category of the course, e.g. Data Science, Android, Angular, React
     private String category;
 

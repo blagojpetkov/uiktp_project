@@ -8,17 +8,21 @@ import { HomeComponent } from './components/home/home.component';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { UsersService } from "./services/users.service";
 import { CoursesService } from "./services/courses.service";
+import { HttpClientModule } from "@angular/common/http";
+import { CoursesComponent } from './components/courses/courses.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
-    HomeComponent
+    HomeComponent,
+    CoursesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    HttpClientModule,
   ],
   providers: [
     UsersService,
