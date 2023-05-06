@@ -10,23 +10,32 @@ import { UsersService } from "./services/users.service";
 import { CoursesService } from "./services/courses.service";
 import { HttpClientModule } from "@angular/common/http";
 import { CoursesComponent } from './components/courses/courses.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { RegisterPageComponent } from './components/register-page/register-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthenticationService } from "./services/authentication.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
     HomeComponent,
-    CoursesComponent
+    CoursesComponent,
+    LoginPageComponent,
+    RegisterPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     UsersService,
     CoursesService,
+    AuthenticationService,
   ],
   bootstrap: [AppComponent]
 })
