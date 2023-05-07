@@ -1,2 +1,40 @@
-<!-- TODO add nav bar here -->
-<router-outlet></router-outlet>
+<!-- TODO modify navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #8651ac;">
+  <a class="navbar-brand" href="#">Learn Today</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+
+      <p class="nav-item nav-link">Welcome, TEST TODO<span></span>!</p>
+
+      <!-- TODO modify below -->
+      <div class="navbar-nav ml-auto" *ngIf="false">
+        <a class="nav-item nav-link" href="/login">Login</a>
+        <a class="nav-item nav-link" href="/register">Register</a>
+      </div>
+
+
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Courses</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="my-3">
+  <router-outlet></router-outlet>
+</div>
+<div>
+  <!-- TODO add footer -->
+</div>

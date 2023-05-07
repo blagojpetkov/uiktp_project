@@ -1,0 +1,22 @@
+ul li span {
+  cursor: pointer;
+}
+
+.courses {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 1em;
+  grid-row-gap: 1em;
+  background-color: white;
+}
+
+.courses img {
+  max-width: 90%;
+  margin-top: 1em;
+}
+
+.course-display {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

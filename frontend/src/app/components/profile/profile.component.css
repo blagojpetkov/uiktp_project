@@ -1,0 +1,10 @@
+.course-preview {
+  background-color: white;
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.course-preview p {
+  margin: 1px 10px;
+}

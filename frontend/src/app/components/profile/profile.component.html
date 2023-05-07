@@ -1,5 +1,24 @@
-<p>Welcome {{user.username}}</p>
+<div class="container d-flex align-items-center flex-column">
+  <h1>Welcome {{user.username}}</h1>
 
-<div *ngFor="let course of courses">
-  <p>Course name: {{ course.name }}</p>
+  <!-- TODO make edit functional -->
+  <div class="w-75 mb-5">
+    <div>
+      <button class="btn btn-sm"><i class="bi-pencil-fill"></i></button>
+      <p class="d-inline">Username: <strong>{{user.username}}</strong></p>
+    </div>
+    <div>
+      <button class="btn btn-sm"><i class="bi-pencil-fill"></i></button>
+      <p class="d-inline">First Name: <strong>{{user.firstName}}</strong></p>
+    </div>
+    <div>
+      <button class="btn btn-sm"><i class="bi-pencil-fill"></i></button>
+      <p class="d-inline">Last Name: <strong>{{user.lastName}}</strong></p>
+    </div>
+  </div>
+
+  <h2 class="mb-3">My Courses</h2>
+  <div *ngFor="let course of courses" class="course-preview">
+    <p>{{ course.name }}, {{ course.description }}</p>
+  </div>
 </div>

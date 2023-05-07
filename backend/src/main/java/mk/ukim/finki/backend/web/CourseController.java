@@ -28,7 +28,12 @@ public class CourseController {
     }
 
     @PostMapping("/add_course")
-    public String addCourse(@RequestParam String name, @RequestParam String description, @RequestParam String category, @RequestParam MultipartFile image){
+    public String addCourse(
+            @RequestParam String name,
+            @RequestParam String description,
+            @RequestParam String category,
+            @RequestParam MultipartFile image
+    ){
         courseRepository.save(new Course(name, description, category, image));
         return "home";
     }

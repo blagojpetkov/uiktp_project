@@ -8,4 +8,5 @@ public interface UserService extends UserDetailsService {
     User findById(Long id);
     User register(String firstName, String lastName, String username, String password, String repeatPassword);
     User getAuthenticatedUser();
+    User findByUsername(String username);
 }
