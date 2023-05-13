@@ -1,0 +1,25 @@
+<div class="container d-flex align-items-center flex-column">
+  <div class="w-75 mb-5 d-flex">
+    <div>
+      <h1 class="d-inline" style="font-size: 120px"><i class="bi bi-person-circle"></i></h1>
+    </div>
+    <div class="mt-5 ms-4">
+      <h1 class="d-inline"><strong>{{user.firstName}} {{user.lastName}}</strong></h1>
+      <br>
+      <h6 class="d-inline">Username: <strong>{{user.username}}</strong></h6>
+    </div>
+    
+  </div>
+
+<div class="container" style="margin-left: 120px;">
+  <h3 class="mb-3">User Achievements</h3>
+  <div class="accordion">
+  <div class="card mt-3 me-3" style="width:500px; display:inline-block;" *ngFor="let achievement of achievements">
+    <div class="card-body" >
+      <h4 class="card-title" ><i class="bi bi-star"></i> {{ achievement.name }}</h4>
+      <p class="card-text">{{ achievement.description }}</p>
+  </div>
+  </div>
+  </div>
+</div>
+

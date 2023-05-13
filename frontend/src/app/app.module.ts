@@ -14,6 +14,7 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from "./services/authentication.service";
+import { ProfilePublicComponent } from './components/profile-public/profile-public.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AuthenticationService } from "./services/authentication.service";
     HomeComponent,
     CoursesComponent,
     LoginPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    ProfilePublicComponent
   ],
   imports: [
     BrowserModule,
