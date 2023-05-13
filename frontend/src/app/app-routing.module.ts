@@ -5,14 +5,16 @@ import { HomeComponent } from "./components/home/home.component";
 import { CoursesComponent } from "./components/courses/courses.component";
 import { LoginPageComponent } from "./components/login-page/login-page.component";
 import { RegisterPageComponent } from "./components/register-page/register-page.component";
+import { ProfilePublicComponent } from "./components/profile-public/profile-public.component";
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'courses', component: CoursesComponent },
   { path: 'home', component: HomeComponent },
-  { path: '**', component: HomeComponent },
   { path: 'login', component: LoginPageComponent },
-  { path: 'register', component: RegisterPageComponent }
+  { path: 'register', component: RegisterPageComponent },
+  { path: 'view-profile', component: ProfilePublicComponent },
+  { path: '**', component: HomeComponent },
 ];
 
 @NgModule({
