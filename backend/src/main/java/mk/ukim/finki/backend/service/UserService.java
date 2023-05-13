@@ -9,4 +9,5 @@ public interface UserService extends UserDetailsService {
     User register(String firstName, String lastName, String username, String password, String repeatPassword);
     User getAuthenticatedUser();
     User findByUsername(String username);
+    void updateUserDetails(String currentPassword, String newUsername, String newPassword);
 }

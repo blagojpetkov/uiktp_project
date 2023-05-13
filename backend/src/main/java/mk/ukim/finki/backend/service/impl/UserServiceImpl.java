@@ -3,6 +3,8 @@ package mk.ukim.finki.backend.service.impl;
 import mk.ukim.finki.backend.models.User;
 import mk.ukim.finki.backend.repository.UserRepository;
 import mk.ukim.finki.backend.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -51,5 +53,17 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return userRepository.findByUsername(s).orElseThrow(() -> new UsernameNotFoundException(s));
     }
-}
+    @Override
+    public void updateUserDetails(String currentPassword, String newUsername, String newPassword) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
 
+        if (passwordEncoder.matches(currentPassword, user.getPassword())) {
+            user.setUsername(newUsername);
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(user);
+        } else {
+            throw new RuntimeException("Invalid Password");
+        }
+    }
+}
