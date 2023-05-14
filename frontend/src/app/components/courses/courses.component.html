@@ -4,11 +4,9 @@
   <h2 class="mb-3">Most popular courses right now</h2>
   <div class="mb-3 w-50 d-flex justify-content-center">
     <ngb-carousel *ngIf="courses.length !== 0">
-      <!-- TODO change from courses to most popular courses from api -->
       <ng-template ngbSlide *ngFor="let course of courses">
         <div class="picsum-img-wrapper">
-          <!-- TODO change to the correct image from the course once everything is handled-->
-          <img src="https://fastly.picsum.photos/id/1084/600/400.jpg?hmac=ZPCI7QX5NpvOlq0yDepIRG3w-_45dPYJtghzjPrQRag" alt="Random first slide" />
+          <img [src]="previewImage(course.image)" alt="Random first slide" />
         </div>
         <div class="carousel-caption">
           <h3>{{ course.name }}</h3>
@@ -28,8 +26,8 @@
     </ul>
     <div class="courses">
       <!-- TODO change to courses by category -->
-      <div *ngFor="let course of courses" class="course-display">
-        <img src="https://fastly.picsum.photos/id/1084/600/400.jpg?hmac=ZPCI7QX5NpvOlq0yDepIRG3w-_45dPYJtghzjPrQRag" alt="TODO"/>
+      <div *ngFor="let course of coursesByCategory" class="course-display">
+        <img [src]="previewImage(course.image)" alt="TODO"/>
         <h3>{{course.name}}</h3>
         <p>{{course.description}}</p>
       </div>

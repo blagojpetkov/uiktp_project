@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from "../../services/users.service";
-import { CoursesService } from "../../services/courses.service";
 import { User } from "../../domain/user";
 import { Course } from "../../domain/course";
+import { EnrollmentService } from "../../services/enrollment.service";
 
 @Component({
   selector: 'app-profile',
@@ -15,17 +15,12 @@ export class ProfileComponent implements OnInit {
   courses: Course[] = [];
 
   constructor(private usersService: UsersService,
-              private coursesService: CoursesService) {
+              private enrollmentService: EnrollmentService,) {
   }
 
   ngOnInit(): void {
-    this.usersService.getUser().subscribe((user) => {
-      this.user = user;
-    })
-
-    this.coursesService.getCourses().subscribe((courses) => {
-      this.courses = courses;
-    })
+    this.usersService.getUser().subscribe((user) => this.user = user)
+    this.enrollmentService.getCoursesForUser().subscribe(result => this.courses = result)
   }
 
 }

@@ -15,12 +15,18 @@ public class CoursesRestController {
 
     private final CourseRepository courseRepository;
 
-    public CoursesRestController(CourseRepository courseRepository) {
+    public CoursesRestController(
+            CourseRepository courseRepository
+    ) {
         this.courseRepository = courseRepository;
     }
 
     @GetMapping
-    public List<Course> coursesForCategory(@RequestParam String category) {
-        return this.courseRepository.coursesForCategory(category);
+    public List<Course> coursesForCategory(@RequestParam(required = false) String category) {
+        if (category == null) {
+            return this.courseRepository.findAll();
+        } else {
+            return this.courseRepository.coursesForCategory(category);
+        }
     }
 }

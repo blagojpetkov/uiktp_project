@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from "../../services/courses.service";
 import { Course } from "../../domain/course";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-courses',
@@ -11,20 +12,31 @@ export class CoursesComponent implements OnInit {
   courses: Course[] = [];
   categories: string[] = ['Data Science', 'Web Development', 'Python', 'Drawing', 'Marketing', 'Music']
   activeCategory = this.categories[0];
+  coursesByCategory: Course[] = [];
 
   constructor(
-    private coursesService: CoursesService
+    private coursesService: CoursesService,
+    private sanitizer: DomSanitizer,
   ) {
   }
 
   ngOnInit(): void {
-    this.coursesService.getCourses().subscribe(courses => this.courses = courses);
-    // TODO make api call to get courses by category for the currently selected category which is this.categories[0]
+    this.coursesService.getCourses().subscribe(mostPopularCourses => this.courses = mostPopularCourses.slice(0, 5))
+    this.coursesService.getCoursesByCategory(this.activeCategory).subscribe(result => {
+      this.coursesByCategory = result;
+    })
   }
 
   onCategoryChange(category: string) {
     this.activeCategory = category;
-    // TODO make an api call to get courses for the specific category
+    this.coursesService.getCoursesByCategory(this.activeCategory).subscribe(result => {
+      this.coursesByCategory = result;
+    })
+  }
+
+  previewImage(image: Blob) {
+    const objectUrl = 'data:image/jpeg;base64,' + image;
+    return this.sanitizer.bypassSecurityTrustUrl(objectUrl);
   }
 
 }

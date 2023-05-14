@@ -13,7 +13,7 @@ import java.util.List;
 public class Course {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String name;
@@ -21,9 +21,6 @@ public class Course {
 
     @ManyToOne
     private User instructor;
-
-    @OneToMany(mappedBy = "course")
-    private List<Enrollment> enrollments = new ArrayList<>();
 
     // TODO turn this into an enum or separate table
     // Defines the category of the course, e.g. Data Science, Android, Angular, React
@@ -37,7 +34,7 @@ public class Course {
 
     // Image for the course
     @Lob
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "BLOB")
     private byte[] image;
 
     public Course(String name, String description, String category, MultipartFile image) {

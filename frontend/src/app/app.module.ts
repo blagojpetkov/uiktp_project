@@ -15,6 +15,7 @@ import { RegisterPageComponent } from './components/register-page/register-page.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from "./services/authentication.service";
 import { ProfilePublicComponent } from './components/profile-public/profile-public.component';
+import { EnrollmentService } from "./services/enrollment.service";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ProfilePublicComponent } from './components/profile-public/profile-publ
     UsersService,
     CoursesService,
     AuthenticationService,
+    EnrollmentService,
   ],
   bootstrap: [AppComponent]
 })
