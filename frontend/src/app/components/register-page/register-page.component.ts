@@ -8,27 +8,32 @@ import { Router } from '@angular/router';
   styleUrls: ['./register-page.component.css'],
 })
 export class RegisterPageComponent {
-  private router: Router
-  fullname: string = '';
-  email: string = '';
+  name: string = '';
+  surname: string = '';
+  username: string = '';
   password: string = '';
   repeat_password: string = '';
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authenticationService: AuthenticationService, private router: Router) {}
 
-  public onSubmit(fullname:string, email:string, password:string, repeat_password:string) {
-    if(password == repeat_password){
+  public onSubmit(name:string, surname:string, username:string, password:string) {
+  
       this.authenticationService.register(
-        fullname,
-        email,
+        name,
+        surname,
+        username,
         password
       );
-  }
-  else{
-    //show error msg
-  }
 }
 public onSignInClick(){
   this.router.navigate(['/login']);
+}
+
+public onGoogleClick(){
+  window.location.href='https://accounts.google.com/'
+}
+
+public onFacebookClick(){
+  window.location.href='https://www.facebook.com/'
 }
 }

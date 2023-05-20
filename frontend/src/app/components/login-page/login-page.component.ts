@@ -7,19 +7,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-page.component.css'],
 })
 export class LoginPageComponent {
-  private router: Router
   email: string = '';
   password: string = '';
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authenticationService: AuthenticationService, private router: Router) {}
 
-  public onSubmit(email: string, password: string) {
+  public onSubmit(username: string, password: string) {
     this.authenticationService.login(
-      email,
+      username,
       password
     );
   }
 
   public onRegisterClick(){
     this.router.navigate(['/register']);
+  }
+
+  public onGoogleClick(){
+    window.location.href='https://accounts.google.com/'
+  }
+  
+  public onFacebookClick(){
+    window.location.href='https://www.facebook.com/'
   }
 }

@@ -9,13 +9,18 @@
             <h3 class="mb-5">Register now!</h3>
 
             <div class="form-outline mb-4">
-              <input type="text" id="fullname" name="fullname"class="form-control form-control-lg" #fullname  />
-              <label class="form-label" for="fullname">Full Name</label>
+              <input type="name" id="name" name="name"class="form-control form-control-lg" #name  />
+              <label class="form-label" for="name">First Name</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="email" id="email"  id="email" class="form-control form-control-lg" #email  />
-              <label class="form-label" for="email">Email</label>
+              <input type="surname" id="surname"  id="email" class="form-control form-control-lg" #surname  />
+              <label class="form-label" for="surname">Last Name</label>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="username" id="username"  id="email" class="form-control form-control-lg" #username  />
+              <label class="form-label" for="username">Last Name</label>
             </div>
 
             <div class="form-outline mb-4">
@@ -24,11 +29,13 @@
             </div>
 
             <div class="form-outline mb-4">
-              <input type="repeat_password" id="repeat_password"  name="repeat_password" class="form-control form-control-lg" #repeat_password />
+              <input type="password" id="repeat_password"  name="repeat_password" class="form-control form-control-lg" #repeat_password />
               <label class="form-label" for="repeat_password">Repeat Password</label>
             </div>
-
-            <button class="btn btn-primary btn-lg btn-block" type="submit" (click)="onSubmit(fullname.value, email.value, password.value, repeat_password.value)" style="background-color: #8651ac">Register</button>
+            <div *ngIf="password.value != repeat_password.value"class="form-text text-danger"> 
+              <span>Passwords do not match.</span>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit" (click)="onSubmit(name.value, surname.value, username.value, password.value)" style="background-color: #8651ac">Register</button>
             <br> <br>
             <p>
               <span >You have an account? </span><button class="btn btn-secondary" (click)="onSignInClick()">Sign in</button>
@@ -36,10 +43,10 @@
             <hr class="my-4">
 
             <button class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;"
-              type="submit"><i class="fab fa-google me-2"></i> Sign in with Google</button>
+              type="submit" (click)="onGoogleClick()"><i class="fab fa-google me-2"></i> Sign in with Google</button>
               <br>
             <button class="btn btn-lg btn-block btn-primary mb-2" style="background-color: #3b5998;"
-              type="submit"><i class="fab fa-facebook-f me-2"></i>Sign in with Facebook</button>
+              type="submit" (click)="onFacebookClick()"><i class="fab fa-facebook-f me-2"></i>Sign in with Facebook</button>
 
           </div>
         </div>
@@ -47,44 +54,3 @@
     </div>
   </div>
 </section>
-<!-- 
-
-<div
-  class="authentication-card-container"
-  fxLayout="column"
-  fxLayoutAlign="center"
->
-  <mat-card class="authentication-card">
-    <mat-card-header>
-      <mat-card-title>Register</mat-card-title></mat-card-header
-    >
-    <mat-card-content>
-      <form
-        [formGroup]="registerForm"
-        fxLayout="column"
-        fxLayoutAlign="center stretch"
-      >
-        <mat-form-field>
-          <mat-label>Username</mat-label>
-          <input matInput formControlName="username" />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="email" />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password" />
-        </mat-form-field>
-      </form>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="onSubmit()">
-        Register
-      </button>
-      <button mat-button routerLink="/login" routerLinkActive="active">
-        Already have an account? Login here.
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</div> -->

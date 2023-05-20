@@ -37,4 +37,11 @@ public class LoginController {
         userService.register(firstName, lastName, username, password, password).toString();
         return "login";
     }
+
+    @PostMapping("/login")
+    public String register(@RequestParam String username,
+                           @RequestParam String password ){
+        userService.findByUsernameAndPassword(username, password).toString();
+        return "home";
+    }
 }
