@@ -12,4 +12,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     @Transactional
     @Query("select c from Course c where c.category = :category")
     List<Course> coursesForCategory(String category);
+
+    @Transactional
+    List<Course> findCoursesByInstructorUsername(String username);
 }

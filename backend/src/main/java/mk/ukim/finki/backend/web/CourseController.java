@@ -1,6 +1,7 @@
 package mk.ukim.finki.backend.web;
 
 import mk.ukim.finki.backend.models.Course;
+import mk.ukim.finki.backend.models.User;
 import mk.ukim.finki.backend.repository.CourseRepository;
 import mk.ukim.finki.backend.service.UserService;
 import org.springframework.http.HttpHeaders;
@@ -8,8 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/courses")
@@ -25,6 +29,14 @@ public class CourseController {
     @GetMapping("/add_course")
     public String addCourse(){
         return "add_course";
+    }
+
+    @GetMapping("/my_courses")
+    public String myCourses(Model model){
+        User user = userService.getAuthenticatedUser();
+        List<Course> courseList = courseRepository.findCoursesByInstructorUsername(user.getUsername());
+        model.addAttribute("courses", courseList);
+        return "my_courses";
     }
 
     @PostMapping("/add_course")

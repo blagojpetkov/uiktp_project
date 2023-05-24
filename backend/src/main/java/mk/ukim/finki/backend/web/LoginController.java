@@ -34,7 +34,12 @@ public class LoginController {
                            @RequestParam String password,
                            @RequestParam String firstName,
                            @RequestParam String lastName){
-        userService.register(firstName, lastName, username, password, password).toString();
+        try {
+            userService.register(firstName, lastName, username, password, password).toString();
+        }
+        catch (RuntimeException e){
+            return "redirect:/register?error="+e.getMessage();
+        }
         return "login";
     }
 

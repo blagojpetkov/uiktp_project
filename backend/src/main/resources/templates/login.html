@@ -57,7 +57,11 @@
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
                         <button type="submit" class="btn btn-block btn-purple">Login</button>
+
                     </form>
+                    <br>
+                    <a href="/register" class="btn btn-block btn-outline-dark btn-sm">New to Coursera? Register Now.</a>
+                    <br><br>
                     <div th:if="${param.error}" class="error-message">Invalid username or password.</div>
                 </div>
             </div>

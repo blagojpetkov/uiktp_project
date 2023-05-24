@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Courses Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #b58dd6;
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<h1 class="text-center mt-3">My Courses</h1>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" th:each="course : ${courses}">
+            <div class="card">
+                <img class="card-img-top" th:src="'/courses/' + ${course.id} + '/image'" alt="Course Image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${course.name}"></h5>
+                    <p class="card-text" th:text="${course.description}"></p>
+                    <p class="card-text"><small class="text-muted" th:text="${course.category}"></small></p>
+                    <a href="#" class="btn btn-primary">Show Course Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br><br>
+
+<!--<ul class="course-list">-->
+<!--    <li class="course-item" th:each="course : ${courses}">-->
+<!--        <h2 th:text="${course.name}"></h2>-->
+<!--        <p th:text="${course.description}"></p>-->
+<!--        <p>Category: <span th:text="${course.category}"></span></p>-->
+<!--        <img th:src="'/courses/' + ${course.id} + '/image'" alt="Course Image" width="200">-->
+<!--    </li>-->
+<!--</ul>-->
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

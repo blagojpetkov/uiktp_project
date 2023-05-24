@@ -2,28 +2,51 @@
 <html>
 <head>
     <title>Create Course</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        body{
+            background-color: #b58dd6;
+        }
+    </style>
 </head>
 <body>
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <h2 class="text-center mb-4">Create Course</h2>
+            <h2 class="text-center mb-4">Create a new course</h2>
             <form action="/courses/add_course" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="name">Name:</label>
+                    <h6 for="name">Name:</h6>
                     <input type="text" class="form-control form-control-lg" id="name" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="description">Description:</label>
+                    <h6 for="description">Description</h6>
                     <textarea class="form-control form-control-lg" id="description" name="description" rows="5" required></textarea>
                 </div>
+
+
+
+                <select class="form-control" name="category" required>
+                    <option value="">Select a category</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Python">Python</option>
+                    <option value="Drawing">Drawing</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Music">Music</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Android">Android</option>
+                    <option value="IOS">IOS</option>
+                </select>
+
+
+
+                <br>
+
                 <div class="form-group">
-                    <label for="category">Category:</label>
-                    <input type="text" class="form-control form-control-lg" id="category" name="category" required>
-                </div>
-                <div class="form-group">
-                    <label for="image">Image:</label>
+                    <h6 for="image">Image</h6>
                     <input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
                 </div>
                 <div class="form-group text-center">
