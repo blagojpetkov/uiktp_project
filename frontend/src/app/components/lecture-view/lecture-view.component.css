@@ -1,0 +1,17 @@
+.margin-on-both-sides {
+    margin-left: 20px;
+    margin-right: 50px;
+  }
+@media (min-width: 768px) {
+    .margin-on-both-sides {
+      margin-left: 20px;
+      margin-right: 50px;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .margin-on-both-sides {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
