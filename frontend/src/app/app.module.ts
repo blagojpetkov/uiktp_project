@@ -16,6 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from "./services/authentication.service";
 import { ProfilePublicComponent } from './components/profile-public/profile-public.component';
 import { EnrollmentService } from "./services/enrollment.service";
+import { CourseViewComponent } from './components/course-view/course-view.component';
+import { LectureViewComponent } from './components/lecture-view/lecture-view.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { EnrollmentService } from "./services/enrollment.service";
     CoursesComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    ProfilePublicComponent
+    ProfilePublicComponent,
+    CourseViewComponent,
+    LectureViewComponent
   ],
   imports: [
     BrowserModule,

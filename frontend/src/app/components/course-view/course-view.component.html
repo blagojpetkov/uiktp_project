@@ -1,0 +1,26 @@
+<!-- <div class="row"> -->
+
+<div style="max-width: 100%;
+overflow-x: hidden;">
+    <div class="col-12  mt-4" style="margin-left: 20px; margin-right: 20px;">
+        <h3>{{selectedCourse.name}}</h3>
+    </div>
+    <div class="col-12 mt-4 margin-on-both-sides">
+        <h5>Instructor:Name Surname</h5>
+        <span class="fas fa-star"></span>
+        <h5>Course Length: X hours</h5>
+    </div>
+
+    <div *ngFor="let lecture of lectures" class="col-12 mt-4 margin-on-both-sides" style="background-color:#F0F0F0; margin-right: 50px; height: 30vh; width: 96vw;">
+        <div style="width: 30%; height: 100%; background-color: white; float:left">
+            <div>
+                
+            </div>
+        </div>
+        <div style="width: 70%; height: 100%; float: left;">
+            <p>{{lecture.name}}</p>
+            <p>{{lecture.description}}</p>
+        </div>
+    </div>
+</div>
+<!-- </div> -->
