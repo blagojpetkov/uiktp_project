@@ -1,20 +1,37 @@
 <div class="container d-flex align-items-center flex-column">
   <h1>Welcome {{user.username}}</h1>
 
-  <!-- TODO make edit functional -->
-  <div class="w-75 mb-5">
+  <div *ngIf="!editView" class="w-75 mb-5">
     <div>
-      <button class="btn btn-sm"><i class="bi-pencil-fill"></i></button>
+      <button (click)="toggleEdit()" class="btn btn-sm"><i class="bi-pencil-fill"></i></button>
       <p class="d-inline">Username: <strong>{{user.username}}</strong></p>
     </div>
     <div>
-      <button class="btn btn-sm"><i class="bi-pencil-fill"></i></button>
+      <button (click)="toggleEdit()" class="btn btn-sm"><i class="bi-pencil-fill"></i></button>
       <p class="d-inline">First Name: <strong>{{user.firstName}}</strong></p>
     </div>
     <div>
-      <button class="btn btn-sm"><i class="bi-pencil-fill"></i></button>
+      <button (click)="toggleEdit()" class="btn btn-sm"><i class="bi-pencil-fill"></i></button>
       <p class="d-inline">Last Name: <strong>{{user.lastName}}</strong></p>
     </div>
+  </div>
+  <div *ngIf="editView" class="w-50 mb-5">
+    <div class="form-outline mb-4">
+      <input type="text" id="username" name="username" class="form-control form-control-lg" #username  />
+      <label class="form-label" for="username">New Username</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input type="text" id="name" name="name" class="form-control form-control-lg" #name  />
+      <label class="form-label" for="name">New First Name</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input type="text" id="surname" name="surname"  class="form-control form-control-lg" #surname  />
+      <label class="form-label" for="surname">New Last Name</label>
+    </div>
+    <button class="btn btn-primary btn-lg btn-block" type="submit" (click)="onSubmit( username.value, name.value, surname.value)" style="background-color: #8651ac">Save</button>
+    <button class="btn btn-secondary btn-lg btn-block ms-5" type="submit" (click)="toggleEdit()">Cancel</button>
   </div>
 
   <h2 class="mb-3">My Courses</h2>
@@ -22,3 +39,4 @@
     <p>{{ course.name }}, {{ course.description }}</p>
   </div>
 </div>
+

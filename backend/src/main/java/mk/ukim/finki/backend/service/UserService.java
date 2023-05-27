@@ -11,4 +11,5 @@ public interface UserService extends UserDetailsService {
     User findByUsername(String username);
     void updateUserDetails(String currentPassword, String newUsername, String newPassword);
     User findByUsernameAndPassword(String username, String password);
+    void updateProfileInfo(String currentUsername, String newUsername, String newFirstName, String newLastName);
 }

@@ -13,17 +13,23 @@ export class RegisterPageComponent {
   username: string = '';
   password: string = '';
   repeat_password: string = '';
+  public show:boolean = false;
 
   constructor(private authenticationService: AuthenticationService, private router: Router) {}
 
-  public onSubmit(name:string, surname:string, username:string, password:string) {
-  
+  public onSubmit(name:string, surname:string, username:string, password:string, repeat_password:string) {
+    this.show=false;
+    console.log(this.name, this.surname, this.username, this.password);
+    if(password== '' || repeat_password == '' || username == '' || name == '' || surname == '') {
+      this.show=true;
+    } else if ( password == repeat_password){
       this.authenticationService.register(
         name,
         surname,
         username,
         password
       );
+    }
 }
 public onSignInClick(){
   this.router.navigate(['/login']);

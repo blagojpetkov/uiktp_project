@@ -72,4 +72,12 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Invalid Password");
         }
     }
+
+    @Override
+    public void updateProfileInfo(String currentUsername, String newUsername, String newFirstName, String newLastName) {
+        User user=userRepository.findByUsername(currentUsername).orElseThrow(() -> new UsernameNotFoundException(currentUsername));
+        user.setUsername(newUsername);
+        user.setFirstName(newFirstName);
+        user.setLastName(newLastName);
+    }
 }

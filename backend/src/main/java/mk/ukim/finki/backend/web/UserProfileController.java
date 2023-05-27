@@ -31,4 +31,13 @@ public class UserProfileController {
         userService.updateUserDetails(currentPassword, newUsername, newPassword);
         return "redirect:/profile";
     }
+
+    @PostMapping("/profile/edit")
+    public String updateProfileInfo(@RequestParam("currentUsername") String currentUsername,
+                                    @RequestParam("newUsername") String newUsername,
+                                    @RequestParam("newFirstName") String newFirstName,
+                                    @RequestParam("newLastName") String newLastName) {
+        userService.updateProfileInfo(currentUsername, newUsername, newFirstName, newLastName);
+        return "redirect:/profile";
+    }
 }

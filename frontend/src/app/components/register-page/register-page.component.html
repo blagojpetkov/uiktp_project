@@ -9,33 +9,36 @@
             <h3 class="mb-5">Register now!</h3>
 
             <div class="form-outline mb-4">
-              <input type="name" id="name" name="name"class="form-control form-control-lg" #name  />
+              <input type="text" id="name" name="name" class="form-control form-control-lg" #name  />
               <label class="form-label" for="name">First Name</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="surname" id="surname"  id="email" class="form-control form-control-lg" #surname  />
+              <input type="text" id="surname" name="surname"  class="form-control form-control-lg" #surname  />
               <label class="form-label" for="surname">Last Name</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="username" id="username"  id="email" class="form-control form-control-lg" #username  />
-              <label class="form-label" for="username">Last Name</label>
+              <input type="text" id="username" name="username" class="form-control form-control-lg" #username  />
+              <label class="form-label" for="username">Username</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="password" id="password"  name="password" class="form-control form-control-lg" #password />
+              <input type="password" id="password" name="password"  name="password" class="form-control form-control-lg" #password />
               <label class="form-label" for="password">Password</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="password" id="repeat_password"  name="repeat_password" class="form-control form-control-lg" #repeat_password />
+              <input type="password" id="repeat_password" name="repeat_password" class="form-control form-control-lg" #repeat_password />
               <label class="form-label" for="repeat_password">Repeat Password</label>
+            </div>
+            <div *ngIf="show" class="form-text text-danger"> 
+              <span>Please fill all fields.</span>
             </div>
             <div *ngIf="password.value != repeat_password.value"class="form-text text-danger"> 
               <span>Passwords do not match.</span>
             </div>
-            <button class="btn btn-primary btn-lg btn-block" type="submit" (click)="onSubmit(name.value, surname.value, username.value, password.value)" style="background-color: #8651ac">Register</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit" (click)="onSubmit(name.value, surname.value, username.value, password.value, repeat_password.value)" style="background-color: #8651ac">Register</button>
             <br> <br>
             <p>
               <span >You have an account? </span><button class="btn btn-secondary" (click)="onSignInClick()">Sign in</button>
