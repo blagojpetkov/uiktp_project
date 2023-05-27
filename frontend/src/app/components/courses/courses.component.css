@@ -20,3 +20,8 @@ ul li span {
   align-items: center;
   flex-direction: column;
 }
+
+.picsum-img-wrapper {
+  max-height: 400px;
+  max-width: 100%;
+}

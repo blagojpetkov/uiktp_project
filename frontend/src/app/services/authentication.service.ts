@@ -17,15 +17,15 @@ export class AuthenticationService {
   public async login(username: string, password: string): Promise<void> {
     // LoginController  ?
     // PostMapping "/login" @RequestParam String username, @RequestParam String password
-    
+
     await firstValueFrom(this.http.post(`/login?username=${username}&password=${password}`,''))
-    this.router.navigate(['/home']);
+    this.router.navigate(['/courses']);
   }
 
   public async register(name: string, surname: string, username:string, password: string): Promise<void> {
     // LoginController  ?
     // PostMapping "/register" @RequestParam String username, @RequestParam String password, @RequestParam String firstName,@RequestParam String lastName
-    
+
     await firstValueFrom(this.http.post(`/register?username=${username}&password=${password}&firstName=${name}&lastName=${surname}`,''))
     this.router.navigate(['/login']);
   }

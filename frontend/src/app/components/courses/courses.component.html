@@ -4,20 +4,15 @@
   <h2 class="mb-3">Most popular courses right now</h2>
   <div class="mb-3 w-50 d-flex justify-content-center" style="width: 400px; height: 400px;">
     <ngb-carousel *ngIf="courses.length !== 0">
-      
       <ng-template ngbSlide *ngFor="let course of courses" >
         <div class="picsum-img-wrapper" (click)="onCourseClicked(course)">
-          <img [src]="'https://www.ncertbooks.guru/wp-content/uploads/2022/05/Course-details.png'" alt="Random first slide"  style="width: 100%; height: 100%;"/>
-
+          <img [src]="previewImage(course.image)" alt="Random first slide"/>
         </div>
         <div class="carousel-caption">
           <h3>{{course.name}}</h3>
           <p>{{course.description}}</p>
-          <button (click)="onCourseClicked(course)">View Course</button>
+          <button class="btn btn-secondary" (click)="onCourseClicked(course)">View Course</button>
         </div>
-          
-        
-        
       </ng-template>
     </ngb-carousel>
   </div>
@@ -30,20 +25,17 @@
         <span class="nav-link" [class.active]="category === activeCategory">{{category}}</span>
       </li>
     </ul>
-    <div class="courses">
-      <!-- TODO change to courses by category -->
+    <div class="courses" *ngIf="coursesByCategory.length !== 0">
       <div *ngFor="let course of coursesByCategory" class="course-display">
-        <img [src]="previewImage(course.image)" alt="TODO"/>
+        <img [src]="previewImage(course.image)" [alt]="course.name"/>
         <h3>{{course.name}}</h3>
         <p>{{course.description}}</p>
       </div>
     </div>
+    <div class="bg-white" *ngIf="coursesByCategory.length === 0">
+      <p class="text-center py-5">
+        There are no courses available for this category
+      </p>
+    </div>
   </div>
 </div>
-<div *ngFor="let course of courses">
-  <h2>{{ course.name }}</h2>
-  <p>{{ course.description }}</p>
-  <!-- <p>Instructor: {{ course.instructor.name }}</p> -->
-  <!-- Additional course details can be displayed here -->
-</div>
-
