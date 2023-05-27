@@ -6,6 +6,7 @@ import mk.ukim.finki.backend.repository.CourseRepository;
 import mk.ukim.finki.backend.repository.LessonRepository;
 import mk.ukim.finki.backend.service.LessonService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -31,9 +32,9 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public Lesson create(String title, String description, String content, int number, Long courseId) {
+    public Lesson create(String title, String description, String content, int number, Long courseId, MultipartFile video) {
         Course course = this.courseRepository.findById(courseId).orElseThrow(() -> new RuntimeException("Course with id " + courseId + " not found"));
-        return this.lessonRepository.save(new Lesson(title, description, content, number, course));
+        return this.lessonRepository.save(new Lesson(title, description, content, number, course, video));
     }
 
     @Override

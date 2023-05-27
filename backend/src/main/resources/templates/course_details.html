@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Course Details</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #b58dd6;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #663399;
+      font-size: 24px;
+      margin-top: 0;
+    }
+
+    .description {
+      margin-bottom: 20px;
+    }
+
+
+    .gray {
+      font-style: italic;
+      color: #666;
+    }
+
+    .lessons {
+      margin-top: 20px;
+    }
+
+    .lessons h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .lesson {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+<!-- Navigation bar -->
+<th:block th:replace="fragments/header"></th:block>
+<div class="container">
+  <h1 class="text-center">Course Details</h1>
+
+  <div class="description">
+    <h2><strong th:text="${course.name}"></strong></h2>
+
+    <h3 class="gray" th:text="${course.description}"></h3>
+    <h3 class="gray" th:text="'Instructor: ' + ${course.instructor.username}"></h3>
+    <h3 class="gray" th:text="'Category: ' + ${course.category}"></h3>
+
+
+  </div>
+  <a th:href="'/courses/add_lesson/' + ${course.id}" class="btn btn-outline-dark">Add a new Lesson</a>
+  <div class="lessons">
+    <br>
+    <h2>Lessons:</h2>
+
+    <div class="lesson" th:each="lesson: ${course.lessons}">
+      <br>
+      <hr>
+      <h3 th:text="${lesson.title}">Lesson 1</h3>
+      <p th:text="${lesson.description}"></p>
+      <video height="200px" th:src="'/courses/'+${lesson.id}+'/video'" controls>
+        Your browser does not support the video tag.
+      </video>
+      <p th:text="${lesson.content}"></p>
+    </div>
+
+  </div>
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

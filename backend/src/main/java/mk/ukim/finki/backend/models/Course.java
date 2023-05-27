@@ -26,7 +26,7 @@ public class Course {
     // Defines the category of the course, e.g. Data Science, Android, Angular, React
     private String category;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Lesson> lessons = new ArrayList<>();
 
     @ManyToMany(mappedBy = "courses")
@@ -34,10 +34,10 @@ public class Course {
 
     // Image for the course
     @Lob
-    @Column(nullable = false, columnDefinition = "BLOB")
+    @Column(nullable = false)
     private byte[] image;
 
-    public Course(String name, String description, String category, MultipartFile image) {
+    public Course(String name, String description, String category, MultipartFile image, User instructor) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -46,6 +46,7 @@ public class Course {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.instructor = instructor;
     }
 
     public Course() {
