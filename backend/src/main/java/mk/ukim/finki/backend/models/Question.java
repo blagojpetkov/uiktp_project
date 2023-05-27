@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -28,6 +26,9 @@ public class Question {
     private String answer4;
 
     private int correctAnswer;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Test test;
 
     public Question(String text, String answer1, String answer2, String answer3, String answer4, int correctAnswer) {
         this.text = text;

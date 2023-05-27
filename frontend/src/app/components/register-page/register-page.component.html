@@ -32,10 +32,10 @@
               <input type="password" id="repeat_password" name="repeat_password" class="form-control form-control-lg" #repeat_password />
               <label class="form-label" for="repeat_password">Repeat Password</label>
             </div>
-            <div *ngIf="show" class="form-text text-danger"> 
+            <div *ngIf="show" class="form-text text-danger">
               <span>Please fill all fields.</span>
             </div>
-            <div *ngIf="password.value != repeat_password.value"class="form-text text-danger"> 
+            <div *ngIf="password.value != repeat_password.value"class="form-text text-danger">
               <span>Passwords do not match.</span>
             </div>
             <button class="btn btn-primary btn-lg btn-block" type="submit" (click)="onSubmit(name.value, surname.value, username.value, password.value, repeat_password.value)" style="background-color: #8651ac">Register</button>
@@ -83,10 +83,10 @@
             <input placeholder="Repeat Password" type="password" class="form-control" id="repeat_password" name="repeat_password" required #repeat_password>
         </div>
         <br>
-          <div *ngIf="show" class="form-text text-danger"> 
+          <div *ngIf="show" class="form-text text-danger">
             <span>Please fill all fields.</span>
           </div>
-          <div *ngIf="password.value != repeat_password.value"class="form-text text-danger"> 
+          <div *ngIf="password.value != repeat_password.value"class="form-text text-danger">
             <span>Passwords do not match.</span>
           </div>
           <br>

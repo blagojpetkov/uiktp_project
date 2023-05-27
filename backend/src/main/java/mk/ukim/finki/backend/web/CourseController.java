@@ -68,6 +68,12 @@ public class CourseController {
         return "redirect:/courses/course_details/"+courseId;
     }
 
+    @GetMapping ("/delete_lesson/{courseId}/{lessonId}")
+    public String deleteLesson(@PathVariable Long courseId, @PathVariable Long lessonId){
+        lessonService.delete(lessonId);
+        return "redirect:/courses/course_details/"+courseId;
+    }
+
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/my_courses")
     public String myCourses(Model model){
@@ -80,11 +86,12 @@ public class CourseController {
 
 
     @GetMapping("/delete_course/{courseId}")
-    public String addCourse(@PathVariable Long courseId){
+    public String deleteCourse(@PathVariable Long courseId){
         courseRepository.deleteById(courseId);
         return "redirect:/courses/my_courses";
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/course_details/{courseId}")
     public String getCourseDetails(@PathVariable Long courseId, Model model){
         model.addAttribute("course", courseRepository.findById(courseId).get());

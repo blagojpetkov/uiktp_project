@@ -22,8 +22,6 @@ public class Course {
     @ManyToOne
     private User instructor;
 
-    // TODO turn this into an enum or separate table
-    // Defines the category of the course, e.g. Data Science, Android, Angular, React
     private String category;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -48,9 +46,5 @@ public class Course {
         }
         this.instructor = instructor;
     }
-
-    public Course() {
-
-    }
-
+    public Course() {}
 }

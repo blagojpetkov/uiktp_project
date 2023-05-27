@@ -1,5 +1,6 @@
 package mk.ukim.finki.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,8 +25,15 @@ public class Lesson {
     @Column(nullable = false)
     private byte[] video;
 
+    //JsonIgnore needed to fix Infinite recursion
+    @JsonIgnore
     @ManyToOne
     private Course course;
+
+    @OneToOne(mappedBy = "lesson", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Test test;
+
+
 
     public Lesson(String title, String description, String content, int number, Course course, MultipartFile video) {
         this.title = title;

@@ -15,7 +15,7 @@ public class Test {
     @GeneratedValue
     private Long id;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "test",cascade = CascadeType.REMOVE)
     private List<Question> questions = new ArrayList<>();
 
     @OneToOne

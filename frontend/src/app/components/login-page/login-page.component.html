@@ -52,12 +52,12 @@
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" name="password" required #password>
                         </div>
-                        <br>
+
                         <button type="submit" (click)="onSubmit(username.value , password.value)" class="btn btn-block btn-purple">Login</button>
 
                     </form>
                     <br>
-                    <a href="/register" class="btn btn-block btn-outline-dark btn-sm">New to Learn Today? Register Now.</a>
+                    <a href="/register" class="btn btn-block btn-outline-dark btn-sm">New to Coursera? Register Now.</a>
                     <br><br>
                     <div *ngIf="invalidUsernamePassword" class="error-message">Invalid username or password.</div>
                 </div>

@@ -73,12 +73,18 @@
     <div class="lesson" th:each="lesson: ${course.lessons}">
       <br>
       <hr>
+      <div class="left" style="width: 40%; display: inline-block; margin-right: 30px;">
       <h3 th:text="${lesson.title}">Lesson 1</h3>
       <p th:text="${lesson.description}"></p>
-      <video height="200px" th:src="'/courses/'+${lesson.id}+'/video'" controls>
+      <video style="width: 100%;" th:src="'/courses/'+${lesson.id}+'/video'" controls>
         Your browser does not support the video tag.
       </video>
       <p th:text="${lesson.content}"></p>
+      </div>
+      <div class="right" style="width: 35%; display: inline-block">
+        <a th:href="'/courses/delete_lesson/' + ${courseId} + '/' + ${lesson.id}" class="btn btn-outline-dark btn-block">Delete Lesson</a>
+        <a th:href="'/courses/add_test/' + ${lesson.id}" class="btn btn-outline-dark btn-block">Add Test</a>
+      </div>
     </div>
 
   </div>
