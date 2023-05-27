@@ -6,3 +6,34 @@
 .authentication-card-container {
     min-height: 100vh;
 }
+body {
+    background-color: #b58dd6;
+}
+.card {
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
+.card-header {
+    background-color: #9b62c6;
+    color: white;
+}
+.btn-purple {
+    background-color: #9b62c6;
+    color: white;
+}
+.btn-purple:hover {
+    background-color: #8651ac;
+    color: white;
+}
+.form-control {
+    border-color: #9b62c6;
+}
+.form-control:focus {
+    border-color: #8651ac;
+    box-shadow: none;
+}
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}

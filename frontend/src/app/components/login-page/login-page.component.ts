@@ -9,9 +9,11 @@ import { Router } from '@angular/router';
 export class LoginPageComponent {
   email: string = '';
   password: string = '';
+  public invalidUsernamePassword:boolean = false;
   constructor(private authenticationService: AuthenticationService, private router: Router) {}
 
   public onSubmit(username: string, password: string) {
+    console.log(username, password)
     this.authenticationService.login(
       username,
       password

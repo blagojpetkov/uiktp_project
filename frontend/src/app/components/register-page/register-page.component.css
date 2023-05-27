@@ -6,3 +6,34 @@
 .authentication-card-container {
     min-height: 100vh;
 }
+body {
+    background-color: #f8f8ff;
+    background-color: #b58dd6;
+}
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 50px;
+    background-color: #f8f8ff;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.form-container h1 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+.btn-purple {
+    background-color: #9b62c6;
+    color: white;
+}
+.btn-purple:hover {
+    background-color: #8651ac;
+    color: white;
+}
