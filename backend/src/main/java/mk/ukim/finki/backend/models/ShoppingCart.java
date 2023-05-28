@@ -1,5 +1,6 @@
 package mk.ukim.finki.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,7 +18,9 @@ public class ShoppingCart {
     @ManyToOne
     private User user;
 
-    @ManyToMany
+    //JsonIgnore needed to fix Infinite recursion
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Course> courses = new ArrayList<>();
 
     public ShoppingCart(User user) {

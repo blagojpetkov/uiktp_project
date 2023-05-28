@@ -9,16 +9,17 @@ import mk.ukim.finki.backend.repository.UserRepository;
 import mk.ukim.finki.backend.service.ShoppingCartService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class ShoppingCartImpl implements ShoppingCartService {
+public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     private final ShoppingCartRepository shoppingCartRepository;
     private final CourseRepository courseRepository;
     private final UserRepository userRepository;
 
-    public ShoppingCartImpl(ShoppingCartRepository shoppingCartRepository, CourseRepository courseRepository, UserRepository userRepository) {
+    public ShoppingCartServiceImpl(ShoppingCartRepository shoppingCartRepository, CourseRepository courseRepository, UserRepository userRepository) {
         this.shoppingCartRepository = shoppingCartRepository;
         this.courseRepository = courseRepository;
         this.userRepository = userRepository;
@@ -31,11 +32,11 @@ public class ShoppingCartImpl implements ShoppingCartService {
     }
 
     @Override
+    @Transactional
     public ShoppingCart getShoppingCartByUser(Long userId) {
-        return this.shoppingCartRepository.findById(userId)
+        return this.shoppingCartRepository.findByUserId(userId)
                 .orElseGet(() -> {
-                    User user = new User();
-                    user.setId(userId);
+                    User user = userRepository.findById(userId).get();
                     return this.shoppingCartRepository.save(new ShoppingCart(user));
                 });
     }
