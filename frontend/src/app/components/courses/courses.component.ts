@@ -55,7 +55,7 @@ export class CoursesComponent implements OnInit {
     enrollmentTemp.user=new User;
     const enrollments = [];
     enrollments.push(enrollmentTemp);
-
+    
     this.course.image= new Blob();
     this.course.enrollments=enrollments;
     this.course2 = new Course();
