@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ProfilePublicComponent implements OnInit {
 
-  user: User; 
+  user: User;
   achievements: Course[] = [];
   username: string;
 
@@ -23,12 +23,7 @@ export class ProfilePublicComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-                           console.log(params);
-                           this.username = params['username'];
-                           console.log(this.username); 
-                          }
-                        );
+    this.route.queryParams.subscribe(params => this.username = params['username']);
 
     this.usersService.getUserByUsername(this.username).subscribe((user) => {
       this.user = user;

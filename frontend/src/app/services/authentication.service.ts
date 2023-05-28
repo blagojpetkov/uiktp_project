@@ -12,25 +12,31 @@ export class AuthenticationService {
   constructor(
     private http: HttpClient,
     private router: Router
-  ) {}
+  ) {
+  }
 
   public async login(username: string, password: string): Promise<void> {
     // LoginController  ?
     // PostMapping "/login" @RequestParam String username, @RequestParam String password
 
-    await firstValueFrom(this.http.post(`/login?username=${username}&password=${password}`,''))
+    await firstValueFrom(this.http.post(`/login?username=${username}&password=${password}`, ''))
     this.router.navigate(['/courses']);
   }
 
-  public async register(name: string, surname: string, username:string, password: string): Promise<void> {
+  public async register(name: string, surname: string, username: string, password: string): Promise<void> {
     // LoginController  ?
-    // PostMapping "/register" @RequestParam String username, @RequestParam String password, @RequestParam String firstName,@RequestParam String lastName
+    // PostMapping "/register" @RequestParam String username, @RequestParam String password, @RequestParam String
+    // firstName,@RequestParam String lastName
 
-    await firstValueFrom(this.http.post(`/register?username=${username}&password=${password}&firstName=${name}&lastName=${surname}`,''))
+    await firstValueFrom(this.http.post(`/register?username=${username}&password=${password}&firstName=${name}&lastName=${surname}`, ''))
     this.router.navigate(['/login']);
   }
 
   public logout() {
     this.router.navigate(['/login']);
+  }
+
+  authentication() {
+    return this.http.get<{ user: string } | null>('/api/authentication');
   }
 }

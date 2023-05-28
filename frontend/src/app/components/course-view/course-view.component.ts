@@ -31,8 +31,7 @@ export class CourseViewComponent implements OnInit {
     this.sharedDataService.courseData$.subscribe(data => {
       this.selectedCourse = data;
     });
-    console.log(this.selectedCourse);
-    
+
   }
 }
 

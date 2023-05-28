@@ -13,7 +13,6 @@ export class LoginPageComponent {
   constructor(private authenticationService: AuthenticationService, private router: Router) {}
 
   public onSubmit(username: string, password: string) {
-    console.log(username, password)
     this.authenticationService.login(
       username,
       password
@@ -27,7 +26,7 @@ export class LoginPageComponent {
   public onGoogleClick(){
     window.location.href='https://accounts.google.com/'
   }
-  
+
   public onFacebookClick(){
     window.location.href='https://www.facebook.com/'
   }

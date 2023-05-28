@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   name: string = '';
   surname: string = '';
   username: string = '';
- 
+
 
   constructor(private usersService: UsersService,
               private enrollmentService: EnrollmentService,) {
@@ -30,13 +30,12 @@ export class ProfileComponent implements OnInit {
   }
 
   public onSubmit(username:string, name:string, surname:string) {
-    console.log(this.user.username, username, name, surname);
     // WITHOUT API CALL ( could be used for presentation ):
     // this.user.username= username;
     // this.user.firstName= name;
     // this.user.lastName= surname;
     // this.editView=false;
-    
+
     this.usersService.updateUserInfo(this.user.username, username,name,surname)
   }
 

@@ -28,8 +28,6 @@ export class CoursesComponent implements OnInit {
     this.coursesService.getCourses().subscribe(mostPopularCourses => this.courses = mostPopularCourses.slice(0, 5))
     this.coursesService.getCoursesByCategory(this.activeCategory).subscribe(result => {
       this.coursesByCategory = result;
-      console.log(result);
-
     });
   }
   onCategoryChange(category: string) {

@@ -19,7 +19,6 @@ export class RegisterPageComponent {
 
   public onSubmit(name:string, surname:string, username:string, password:string, repeat_password:string) {
     this.show=false;
-    console.log(this.name, this.surname, this.username, this.password);
     if(password== '' || repeat_password == '' || username == '' || name == '' || surname == '') {
       this.show=true;
     } else if ( password == repeat_password){

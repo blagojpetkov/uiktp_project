@@ -17,6 +17,7 @@ import { ProfilePublicComponent } from './components/profile-public/profile-publ
 import { EnrollmentService } from "./services/enrollment.service";
 import { CourseViewComponent } from './components/course-view/course-view.component';
 import { LectureViewComponent } from './components/lecture-view/lecture-view.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LectureViewComponent } from './components/lecture-view/lecture-view.com
     RegisterPageComponent,
     ProfilePublicComponent,
     CourseViewComponent,
-    LectureViewComponent
+    LectureViewComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
