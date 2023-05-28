@@ -5,6 +5,7 @@ import mk.ukim.finki.backend.models.Lesson;
 import mk.ukim.finki.backend.models.User;
 import mk.ukim.finki.backend.repository.CourseRepository;
 import mk.ukim.finki.backend.service.LessonService;
+import mk.ukim.finki.backend.service.ReviewService;
 import mk.ukim.finki.backend.service.UserService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -24,10 +26,13 @@ public class CourseController {
     private final UserService userService;
     private final CourseRepository courseRepository;
     private final LessonService lessonService;
-    public CourseController(UserService userService, CourseRepository courseRepository, LessonService lessonService) {
+    private final ReviewService reviewService;
+
+    public CourseController(UserService userService, CourseRepository courseRepository, LessonService lessonService, ReviewService reviewService) {
         this.userService = userService;
         this.courseRepository = courseRepository;
         this.lessonService = lessonService;
+        this.reviewService = reviewService;
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -96,6 +101,17 @@ public class CourseController {
     public String getCourseDetails(@PathVariable Long courseId, Model model){
         model.addAttribute("course", courseRepository.findById(courseId).get());
         return "course_details";
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PostMapping("/sendReview")
+    public String addReview(@RequestParam Long courseId,
+                            @RequestParam int rating,
+                            @RequestParam String comment){
+        Date date = new Date();
+        User user = userService.getAuthenticatedUser();
+        reviewService.create(user.getId(), courseId, rating, comment, date);
+        return "my_courses";
     }
 
     @GetMapping("/{id}/image")
