@@ -7,7 +7,7 @@
     <style>
         body {
             background-color: #8651ac;
-            font-family: Arial, sans-serif;
+            /*font-family: Arial, sans-serif;*/
         }
 
         .card {
@@ -43,6 +43,7 @@
                     <a th:href="'/courses/course_details/' + ${course.id}" class="btn btn-block btn-primary">Show Course Details</a>
                     <a class="btn btn-outline-dark btn-block" th:href="'/courses/delete_course/' + ${course.id}">Delete Course</a>
                     <a class="btn btn-outline-dark btn-block" th:href="'/courses/add_to_shopping_cart/' + ${course.id}">Add Course To Shopping Cart</a>
+                    <h4 style="color: green; text-align: center; margin-top: 10px;" th:text="'$' + ${course.price}"></h4>
                 </div>
             </div>
         </div>

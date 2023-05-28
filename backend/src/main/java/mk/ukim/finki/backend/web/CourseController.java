@@ -46,7 +46,7 @@ public class CourseController {
         User user = userService.getAuthenticatedUser();
         ShoppingCart cart = shoppingCartService.getShoppingCartByUser(user.getId());
         Course course = courseRepository.getById(courseId);
-        cart.getCourses().add(course);
+        cart.getCourses().remove(course);
         userService.save(user);
         return "redirect:/courses/shopping_cart";
     }

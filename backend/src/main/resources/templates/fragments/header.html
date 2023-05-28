@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto" style="padding-top: 15px;">
             <h4 class="nav-item nav-link" style="margin-top: 0; padding-top: 5px; margin-right: 80px;">The new integrated platform to learn anything, anywhere</h4>
-            <p class="nav-item nav-link" th:if="${#request.getRemoteUser() != null}">Welcome, <span th:text="${#request.getRemoteUser()}"></span>!</p>
+            <a href="/logout" class="nav-item nav-link" th:if="${#request.getRemoteUser() != null}">Log out, <span th:text="${#request.getRemoteUser()}"></span>!</a>
 
             <div th:if="${#request.getRemoteUser() == null}" class="navbar-nav ml-auto">
                 <a class="nav-item nav-link" href="/login">Login</a>
@@ -26,9 +26,6 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/courses/shopping_cart">My Shopping Cart</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
             </li>
         </ul>
     </div>
