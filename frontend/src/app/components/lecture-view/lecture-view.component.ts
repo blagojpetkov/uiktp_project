@@ -28,7 +28,21 @@ export class LectureViewComponent implements OnInit {
         category: 'Course Category',
         lessons: [],
         image: new Blob()
-      }
+      },
+      parts: [
+        {
+          video: 'video-url-1',
+          title: 'Part 1',
+          description: 'Description of Part 1',
+          test: 'test-1'
+        },
+        {
+          video: 'video-url-2',
+          title: 'Part 2',
+          description: 'Description of Part 2',
+          test: 'test-2'
+        }
+      ]
     };
 
     debugger
