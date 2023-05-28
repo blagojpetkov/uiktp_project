@@ -24,6 +24,8 @@ public class Course {
 
     private String category;
 
+    public double price;
+
     @OneToMany(mappedBy = "course", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Lesson> lessons = new ArrayList<>();
 
@@ -35,7 +37,7 @@ public class Course {
     @Column(nullable = false)
     private byte[] image;
 
-    public Course(String name, String description, String category, MultipartFile image, User instructor) {
+    public Course(String name, String description, String category, MultipartFile image, User instructor, double price) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -45,6 +47,7 @@ public class Course {
             e.printStackTrace();
         }
         this.instructor = instructor;
+        this.price = price;
     }
     public Course() {}
 }

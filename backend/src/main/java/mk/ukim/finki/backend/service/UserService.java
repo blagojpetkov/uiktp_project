@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends UserDetailsService {
+    User save(User user);
     User findById(Long id);
     User register(String firstName, String lastName, String username, String password, String repeatPassword);
     User getAuthenticatedUser();

@@ -2,10 +2,12 @@ package mk.ukim.finki.backend.web;
 
 import mk.ukim.finki.backend.models.Course;
 import mk.ukim.finki.backend.models.Lesson;
+import mk.ukim.finki.backend.models.ShoppingCart;
 import mk.ukim.finki.backend.models.User;
 import mk.ukim.finki.backend.repository.CourseRepository;
 import mk.ukim.finki.backend.service.LessonService;
 import mk.ukim.finki.backend.service.ReviewService;
+import mk.ukim.finki.backend.service.ShoppingCartService;
 import mk.ukim.finki.backend.service.UserService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,12 +29,46 @@ public class CourseController {
     private final CourseRepository courseRepository;
     private final LessonService lessonService;
     private final ReviewService reviewService;
+    private final ShoppingCartService shoppingCartService;
 
-    public CourseController(UserService userService, CourseRepository courseRepository, LessonService lessonService, ReviewService reviewService) {
+    public CourseController(UserService userService, CourseRepository courseRepository, LessonService lessonService, ReviewService reviewService, ShoppingCartService shoppingCartService) {
         this.userService = userService;
         this.courseRepository = courseRepository;
         this.lessonService = lessonService;
         this.reviewService = reviewService;
+        this.shoppingCartService = shoppingCartService;
+    }
+
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/delete_course_from_shopping_cart/{courseId}")
+    public String deleteFromShoppingCart(@PathVariable Long courseId, Model model){
+        User user = userService.getAuthenticatedUser();
+        ShoppingCart cart = shoppingCartService.getShoppingCartByUser(user.getId());
+        Course course = courseRepository.getById(courseId);
+        cart.getCourses().add(course);
+        userService.save(user);
+        return "redirect:/courses/shopping_cart";
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/add_to_shopping_cart/{courseId}")
+    public String addToShoppingCart(@PathVariable Long courseId, Model model){
+        User user = userService.getAuthenticatedUser();
+        ShoppingCart cart = shoppingCartService.getShoppingCartByUser(user.getId());
+        Course course = courseRepository.getById(courseId);
+        cart.getCourses().add(course);
+        userService.save(user);
+        return "redirect:/courses/shopping_cart";
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/shopping_cart")
+    public String getShoppingCart(Model model){
+        User user = userService.getAuthenticatedUser();
+        ShoppingCart cart = shoppingCartService.getShoppingCartByUser(user.getId());
+        model.addAttribute("courses", cart.getCourses());
+        return "shopping_cart";
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -46,9 +82,10 @@ public class CourseController {
             @RequestParam String name,
             @RequestParam String description,
             @RequestParam String category,
-            @RequestParam MultipartFile image
+            @RequestParam MultipartFile image,
+            @RequestParam double price
     ){
-        courseRepository.save(new Course(name, description, category, image, userService.getAuthenticatedUser()));
+        courseRepository.save(new Course(name, description, category, image, userService.getAuthenticatedUser(), price));
         return "redirect:/courses/my_courses";
     }
 
@@ -107,9 +144,10 @@ public class CourseController {
     @PostMapping("/sendReview")
     public String addReview(@RequestParam Long courseId,
                             @RequestParam int rating,
-                            @RequestParam String comment){
+                            @RequestParam String comment, Model model){
         Date date = new Date();
         User user = userService.getAuthenticatedUser();
+        model.addAttribute("courses", courseRepository.findCoursesByInstructorUsername(user.getUsername()));
         reviewService.create(user.getId(), courseId, rating, comment, date);
         return "my_courses";
     }
