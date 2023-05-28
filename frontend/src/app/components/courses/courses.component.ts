@@ -90,4 +90,9 @@ this.course2.enrollments = enrollments;
     this.sharedDataService.setCourseData(courseSelected);
     this.router.navigate(['/course-view']);
   }
+
+  onAddToShoppingCartClick(course: Course){
+    // implementation
+    console.log("clicked", course.name)
+  }
 }
