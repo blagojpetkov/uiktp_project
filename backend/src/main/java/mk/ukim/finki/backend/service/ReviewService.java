@@ -18,4 +18,8 @@ public interface ReviewService {
     Review update(Long id, Long userId, Long courseId, int grade, String text, Date reviewDate);
 
     void delete(Long id);
+    Double averageReviewByCourse(Long courseId);
+
+    List<Review> reviewsByCourse(Long courseId);
+
 }
