@@ -17,12 +17,14 @@ export class CoursesComponent implements OnInit {
   categories: string[] = ['Data Science', 'Web Development', 'Python', 'Drawing', 'Marketing', 'Music', 'Mobile Development']
   activeCategory = this.categories[0];
   coursesByCategory: Course[] = [];
+  course: any;
+  course2: any;
 
   constructor(
     private coursesService: CoursesService,
     private sanitizer: DomSanitizer,
-    private router:Router,
-    private sharedDataService:SharedDataService
+    private router: Router,
+    private sharedDataService: SharedDataService
   ) {
   }
 
@@ -44,8 +46,9 @@ export class CoursesComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustUrl(objectUrl);
   }
 
-  onCourseClicked(courseSelected:any){
+  onCourseClicked(courseSelected: any) {
     this.sharedDataService.setCourseData(courseSelected);
+    // this.sharedDataService.setCourseData(this.course);
     this.router.navigate(['/course-view']);
   }
 
