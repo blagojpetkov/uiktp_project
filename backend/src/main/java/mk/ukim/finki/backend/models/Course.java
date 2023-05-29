@@ -1,5 +1,6 @@
 package mk.ukim.finki.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +31,7 @@ public class Course {
     private List<Lesson> lessons = new ArrayList<>();
 
     @ManyToMany(mappedBy = "courses")
+    @JsonIgnore
     private List<ShoppingCart> shoppingCarts = new ArrayList<>();
 
     // Image for the course

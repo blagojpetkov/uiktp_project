@@ -26,6 +26,25 @@
 
 <h2 class="text-center text-white">My Shopping Cart</h2>
 <br>
+<div th:if="${param.success}">
+    <h3 style="color: greenyellow; text-align: center">Success! Your transaction was completed successfully.</h3>
+</div>
+<div class="text-center">
+    <form action='/charge' method='POST' id='checkout-form'>
+        <input type='hidden' th:value='${amount}' name='amount' />
+        <h4 style="color: greenyellow">Price of items in cart: $<span th:text='${amount/100}' /></h4>
+        <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+        <script
+                src='https://checkout.stripe.com/checkout.js'
+                class='stripe-button'
+                th:attr='data-key=${stripePublicKey},
+         data-amount=${amount},
+         data-currency=${currency}'
+                data-locale='auto'
+                data-zip-code='false'>
+        </script>
+    </form>
+</div>
 <div class="text-center">
 </div>
 <br>

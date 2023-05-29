@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ShoppingCartService {
     public List<Course> listAllCoursesInShoppingCart(Long userId);
+    public List<ShoppingCart> findByCoursesContaining(Course course);
 
     public ShoppingCart getShoppingCartByUser(Long userId);
 
@@ -15,4 +16,6 @@ public interface ShoppingCartService {
     public ShoppingCart removeCourseFromShoppingCart(Long userId, Long courseId);
 
     public void clearShoppingCart(Long userId);
+
+    void save(ShoppingCart cart);
 }

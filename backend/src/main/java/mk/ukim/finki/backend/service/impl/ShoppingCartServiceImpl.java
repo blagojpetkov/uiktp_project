@@ -32,6 +32,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
+    public List<ShoppingCart> findByCoursesContaining(Course course) {
+        return shoppingCartRepository.findByCoursesContaining(course);
+    }
+
+    @Override
     @Transactional
     public ShoppingCart getShoppingCartByUser(Long userId) {
         return this.shoppingCartRepository.findByUserId(userId)
@@ -62,5 +67,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         ShoppingCart shoppingCart = this.getShoppingCartByUser(userId);
         shoppingCart.getCourses().clear();
         this.shoppingCartRepository.save(shoppingCart);
+    }
+
+    @Override
+    public void save(ShoppingCart cart) {
+        shoppingCartRepository.save(cart);
     }
 }

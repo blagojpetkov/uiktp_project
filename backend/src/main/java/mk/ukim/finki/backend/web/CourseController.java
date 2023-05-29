@@ -4,11 +4,13 @@ import mk.ukim.finki.backend.models.Course;
 import mk.ukim.finki.backend.models.Lesson;
 import mk.ukim.finki.backend.models.ShoppingCart;
 import mk.ukim.finki.backend.models.User;
+import mk.ukim.finki.backend.models.stripe.ChargeRequest;
 import mk.ukim.finki.backend.repository.CourseRepository;
 import mk.ukim.finki.backend.service.LessonService;
 import mk.ukim.finki.backend.service.ReviewService;
 import mk.ukim.finki.backend.service.ShoppingCartService;
 import mk.ukim.finki.backend.service.UserService;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +21,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -68,6 +72,10 @@ public class CourseController {
         User user = userService.getAuthenticatedUser();
         ShoppingCart cart = shoppingCartService.getShoppingCartByUser(user.getId());
         model.addAttribute("courses", cart.getCourses());
+        double amount = cart.getCourses().stream().mapToDouble(Course::getPrice).sum();
+        model.addAttribute("amount", amount*100);
+        model.addAttribute("stripePublicKey", "pk_test_51N5ACrAf5nZU7fOF46OKkqqPDuqVXdIaK4iZzjoRNi3nPcxs0NThwztUOnj77sCaQIRsm6eYe9ehQTn8xXNtgdj600gjODscrU");
+        model.addAttribute("currency", ChargeRequest.Currency.EUR);
         return "shopping_cart";
     }
 
@@ -128,8 +136,23 @@ public class CourseController {
 
 
     @GetMapping("/delete_course/{courseId}")
+    @Transactional
     public String deleteCourse(@PathVariable Long courseId){
+        //
+        Course course = courseRepository.findById(courseId).orElseThrow();
+//        course.setShoppingCarts(new ArrayList<>());
+//        courseRepository.save(course);
+//        courseRepository.flush();
+//        List<ShoppingCart> carts = course.getShoppingCarts();
+
+                // Remove the course from shopping carts
+        List<ShoppingCart> shoppingCarts = shoppingCartService.findByCoursesContaining(course);
+        for (ShoppingCart cart : shoppingCarts) {
+            cart.getCourses().remove(course);
+            shoppingCartService.save(cart);
+        }
         courseRepository.deleteById(courseId);
+
         return "redirect:/courses/my_courses";
     }
 
