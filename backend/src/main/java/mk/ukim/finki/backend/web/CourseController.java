@@ -1,6 +1,7 @@
 package mk.ukim.finki.backend.web;
 
 import mk.ukim.finki.backend.models.*;
+import mk.ukim.finki.backend.models.stripe.ChargeRequest;
 import mk.ukim.finki.backend.repository.CourseRepository;
 import mk.ukim.finki.backend.service.LessonService;
 import mk.ukim.finki.backend.service.ReviewService;
