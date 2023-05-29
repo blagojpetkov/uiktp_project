@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from "@angular/common/http";
 import { firstValueFrom } from 'rxjs';
+import { SharedDataService } from './shared-data/shared-data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,8 @@ export class AuthenticationService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private sharedDataService:SharedDataService,
   ) {
   }
 
@@ -19,6 +21,15 @@ export class AuthenticationService {
     // LoginController  ?
     // PostMapping "/login" @RequestParam String username, @RequestParam String password
 
+    debugger
+    // Source component
+sessionStorage.setItem('sharedData', JSON.stringify(username));
+// Source component
+sessionStorage.setItem('sharedData2', JSON.stringify(password));
+
+
+    // this.sharedDataService.setData(password,username);
+    // this.sharedDataService.username=username;
     await firstValueFrom(this.http.post(`/login?username=${username}&password=${password}`, ''))
     this.router.navigate(['/courses']);
   }
