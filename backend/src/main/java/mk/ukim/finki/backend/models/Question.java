@@ -1,5 +1,6 @@
 package mk.ukim.finki.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,11 +27,12 @@ public class Question {
     private String answer4;
 
     private int correctAnswer;
-
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     private Test test;
 
-    public Question(String text, String answer1, String answer2, String answer3, String answer4, int correctAnswer) {
+    public Question(Test test, String text, String answer1, String answer2, String answer3, String answer4, int correctAnswer) {
+        this.test = test;
         this.text = text;
         this.answer1 = answer1;
         this.answer2 = answer2;

@@ -18,4 +18,6 @@ public interface LessonService {
     Lesson update(Long id, String title, String description, String content, int number, Long courseId);
 
     void delete(Long id);
+
+    void save(Lesson lesson);
 }

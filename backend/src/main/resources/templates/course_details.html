@@ -142,12 +142,14 @@
     </form>
 
     <br>
+    <div style="background-color: #b58dd6; padding: 20px; border-radius: 10px;">
     <h3 class="gray">Course ratings</h3>
-    <p class="gray">Average rating score</p>
-    <p class="gray" th:text="${averageScore}"></p>
+    <p class="gray" th:text="'Average rating score: ' + ${averageScore}"></p>
+      <p>Comments: </p>
     <ul class="no-bullet">
       <li th:each="comment : ${reviews}" th:text="${comment.text}"></li>
     </ul>
+    </div>
 
   </div>
   <a th:href="'/courses/add_lesson/' + ${course.id}" class="btn btn-outline-dark">Add a new Lesson</a>
@@ -168,7 +170,8 @@
       </div>
       <div class="right" style="width: 35%; display: inline-block">
         <a th:href="'/courses/delete_lesson/' + ${courseId} + '/' + ${lesson.id}" class="btn btn-outline-dark btn-block">Delete Lesson</a>
-        <a th:href="'/courses/add_test/' + ${lesson.id}" class="btn btn-outline-dark btn-block">Add Test</a>
+        <a th:if="${lesson.test==null}" th:href="'/courses/add_test/' + ${lesson.id}" class="btn btn-outline-dark btn-block">Add Test</a>
+        <a th:if="${lesson.test!=null}" th:href="'/courses/take_test/' + ${lesson.id}" class="btn btn-outline-dark btn-block">Take Test</a>
       </div>
     </div>
 

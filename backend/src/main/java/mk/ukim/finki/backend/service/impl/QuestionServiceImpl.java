@@ -8,13 +8,14 @@ import mk.ukim.finki.backend.repository.CourseRepository;
 import mk.ukim.finki.backend.repository.QuestionRepository;
 import mk.ukim.finki.backend.repository.ReviewRepository;
 import mk.ukim.finki.backend.repository.UserRepository;
+import mk.ukim.finki.backend.service.QuestionService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
-public class QuestionServiceImpl {
+public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionRepository questionRepository;
 
@@ -33,12 +34,13 @@ public class QuestionServiceImpl {
     }
 
 
-    public Question create(String text, String answer1, String answer2, String answer3, String answer4, int correctAnswer) {
-        return this.questionRepository.save(new Question(text, answer1, answer2, answer3, answer4, correctAnswer));
-    }
-
 
     public void delete(Long id) {
         this.questionRepository.deleteById(id);
+    }
+
+    @Override
+    public void save(Question question) {
+        questionRepository.save(question);
     }
 }

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Test</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Add Test</h2>
+    <form th:action="'/courses/add_test/' + ${lessonId}" method="post">
+        <div class="card">
+            <div class="card-body">
+                <h5>Test Questions</h5>
+                <hr>
+
+                <!-- Question 1 -->
+                <div class="form-group">
+                    <label for="question1">Question 1:</label>
+                    <input type="text" class="form-control" id="question1" name="question1" required>
+                </div>
+                <div class="form-group">
+                    <label for="answer1_1">Answer 1:</label>
+                    <input type="text" class="form-control" id="answer1_1" name="q1answer1" required>
+                </div>
+                <div class="form-group">
+                    <label for="answer1_2">Answer 2:</label>
+                    <input type="text" class="form-control" id="answer1_2" name="q1answer2" required>
+                </div>
+                <div class="form-group">
+                    <label for="answer1_3">Answer 3:</label>
+                    <input type="text" class="form-control" id="answer1_3" name="q1answer3" required>
+                </div>
+                <div class="form-group">
+                    <label for="answer1_4">Answer 4:</label>
+                    <input type="text" class="form-control" id="answer1_4" name="q1answer4" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="int1">Which answer is correct (1-4):</label>
+                    <input type="number" class="form-control" id="int1" name="int1" required>
+                </div>
+                <hr>
+
+                <!-- Question 2 -->
+                <div class="form-group">
+                    <label for="question2">Question 2:</label>
+                    <input type="text" class="form-control" id="question2" name="question2" required>
+                </div>
+                <div class="form-group">
+                    <label for="answer2_1">Answer 1:</label>
+                    <input type="text" class="form-control" id="answer2_1" name="q2answer1" required>
+                </div>
+                <div class="form-group">
+                    <label for="answer2_2">Answer 2:</label>
+                    <input type="text" class="form-control" id="answer2_2" name="q2answer2" required>
+                </div>
+                <div class="form-group">
+                    <label for="answer2_3">Answer 3:</label>
+                    <input type="text" class="form-control" id="answer2_3" name="q2answer3" required>
+                </div>
+                <div class="form-group">
+                    <label for="answer2_4">Answer 4:</label>
+                    <input type="text" class="form-control" id="answer2_4" name="q2answer4" required>
+                </div>
+                <div class="form-group">
+                    <label for="int2">Which answer is correct (1-4):</label>
+                    <input type="number" class="form-control" id="int2" name="int2" required>
+                </div>
+                <hr>
+
+                <!-- Question 3 -->
+                <div class="form-group">
+                    <label for="question3">Question 3:</label>
+                    <input type="text" class="form-control" id="question3" name="question3" required>
+                </div>
+                <div class="form-group">
+                    <label for="answer3_1">Answer 1:</label>
+                    <input type="text" class="form-control" id="answer3_1" name="q3answer1" required>
+                </div>
+                <div class="form-group">
+                    <label for="answer3_2">Answer 2:</label>
+                    <input type="text" class="form-control" id="answer3_2" name="q3answer2" required>
+                </div>
+                <div class="form-group">
+                    <label for="answer3_3">Answer 3:</label>
+                    <input type="text" class="form-control" id="answer3_3" name="q3answer3" required>
+                </div>
+                <div class="form-group">
+                    <label for="answer3_4">Answer 4:</label>
+                    <input type="text" class="form-control" id="answer3_4" name="q3answer4" required>
+                </div>
+                <div class="form-group">
+                    <label for="int3">Which answer is correct (1-4):</label>
+                    <input type="number" class="form-control" id="int3" name="int3" required>
+                </div>
+                <hr>
+
+                <button type="submit" class="btn btn-primary">Add Test</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

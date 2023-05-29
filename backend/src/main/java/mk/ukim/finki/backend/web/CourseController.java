@@ -3,11 +3,8 @@ package mk.ukim.finki.backend.web;
 import mk.ukim.finki.backend.models.*;
 import mk.ukim.finki.backend.models.stripe.ChargeRequest;
 import mk.ukim.finki.backend.repository.CourseRepository;
-import mk.ukim.finki.backend.service.LessonService;
-import mk.ukim.finki.backend.service.ReviewService;
-import mk.ukim.finki.backend.service.ShoppingCartService;
-import mk.ukim.finki.backend.service.UserService;
-import org.springframework.data.crossstore.ChangeSetPersister;
+import mk.ukim.finki.backend.service.*;
+import mk.ukim.finki.backend.service.impl.TestServiceImpl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,13 +28,17 @@ public class CourseController {
     private final LessonService lessonService;
     private final ReviewService reviewService;
     private final ShoppingCartService shoppingCartService;
+    private final TestServiceImpl testService;
+    private final QuestionService questionService;
 
-    public CourseController(UserService userService, CourseRepository courseRepository, LessonService lessonService, ReviewService reviewService, ShoppingCartService shoppingCartService) {
+    public CourseController(UserService userService, CourseRepository courseRepository, LessonService lessonService, ReviewService reviewService, ShoppingCartService shoppingCartService, TestServiceImpl testService, QuestionService questionService) {
         this.userService = userService;
         this.courseRepository = courseRepository;
         this.lessonService = lessonService;
         this.reviewService = reviewService;
         this.shoppingCartService = shoppingCartService;
+        this.testService = testService;
+        this.questionService = questionService;
     }
 
 
@@ -122,6 +123,61 @@ public class CourseController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/add_test/{lessonId}")
+    public String addTestToLesson(@PathVariable String lessonId, Model model){
+        model.addAttribute("lessonId", lessonId);
+        return "add_test";
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PostMapping("/add_test/{lessonId}")
+    public String postAddTestToLesson(@PathVariable Long lessonId,
+                                      @RequestParam String question1,
+                                      @RequestParam String question2,
+                                      @RequestParam String question3,
+                                      @RequestParam String q1answer1,
+                                      @RequestParam String q1answer2,
+                                      @RequestParam String q1answer3,
+                                      @RequestParam String q1answer4,
+                                      @RequestParam String q2answer1,
+                                      @RequestParam String q2answer2,
+                                      @RequestParam String q2answer3,
+                                      @RequestParam String q2answer4,
+                                      @RequestParam String q3answer1,
+                                      @RequestParam String q3answer2,
+                                      @RequestParam String q3answer3,
+                                      @RequestParam String q3answer4,
+                                      @RequestParam int int1,
+                                      @RequestParam int int2,
+                                      @RequestParam int int3,
+                                      Model model){
+        model.addAttribute("lessonId", lessonId);
+        Test test = new Test();
+
+        Lesson lesson = lessonService.findById(lessonId);
+        test.setLesson(lesson);
+        testService.save(test);
+
+        questionService.save(new Question(test, question1, q1answer1, q1answer2, q1answer3, q1answer4, int1));
+        questionService.save(new Question(test, question2, q2answer1, q2answer2, q2answer3, q2answer4, int2));
+        questionService.save(new Question(test, question3, q3answer1, q3answer2, q3answer3, q3answer4, int3));
+
+
+        Course course = courseRepository.findCourseByLessonsId(lessonId).get();
+        return "redirect:/courses/course_details/" + course.getId();
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/take_test/{lessonId}")
+    public String takeTest(@PathVariable Long lessonId, Model model){
+        Lesson lesson = lessonService.findById(lessonId);
+        Test test = lesson.getTest();
+        model.addAttribute("courseId", lesson.getCourse().getId());
+        model.addAttribute("test", test);
+        return "take_test";
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/my_courses")
     public String myCourses(Model model){
         User user = userService.getAuthenticatedUser();
@@ -175,7 +231,7 @@ public class CourseController {
         User user = userService.getAuthenticatedUser();
         model.addAttribute("courses", courseRepository.findCoursesByInstructorUsername(user.getUsername()));
         reviewService.create(user.getId(), courseId, rating, comment, date);
-        return "my_courses";
+        return "redirect:/course_details/" + courseId;
     }
 
     @GetMapping("/{id}/image")

@@ -59,4 +59,9 @@ public class LessonServiceImpl implements LessonService {
         course.getLessons().remove(lesson);
         courseRepository.save(course);
     }
+
+    @Override
+    public void save(Lesson lesson) {
+        lessonRepository.save(lesson);
+    }
 }

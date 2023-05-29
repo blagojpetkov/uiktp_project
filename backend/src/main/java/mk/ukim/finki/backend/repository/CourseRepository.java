@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
@@ -15,4 +16,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     @Transactional
     List<Course> findCoursesByInstructorUsername(String username);
+
+    Optional<Course> findCourseByLessonsId(Long lessons_id);
 }

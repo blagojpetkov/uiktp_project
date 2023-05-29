@@ -9,6 +9,7 @@ import mk.ukim.finki.backend.repository.UserRepository;
 import mk.ukim.finki.backend.service.ReviewService;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -67,7 +68,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Double averageReviewByCourse(Long courseId) {
-        Optional<Course> course = this.courseRepository.findById(courseId);
+        Course course = this.courseRepository.findById(courseId).orElseThrow();
         List<Review> reviewList = this.reviewRepository.findAll()
                 .stream()
                 .filter(review -> review.getCourse().equals(course))
@@ -77,8 +78,8 @@ public class ReviewServiceImpl implements ReviewService {
                 .mapToDouble(Review::getGrade)
                 .average()
                 .orElse(0.0);
-
-        return average;
+        DecimalFormat df = new DecimalFormat("#.00");
+        return Double.parseDouble(df.format(average));
     }
 
     @Override

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test View</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+<body>
+<div class="container">
+    <h1>Test Questions</h1>
+    <form th:action="'/courses/course_details/' + ${courseId}" method="get">
+
+        <div th:each="question : ${test.questions}">
+            <h4 th:text="${question.text}"></h4>
+            <div class="form-group">
+                <label for="answer" th:text="${'Answer for Question ' + (questionStat.index + 1)}"></label>
+                <select class="form-control" id="answer">
+                    <option value="" disabled selected>Select an answer</option>
+                    <option th:value="${question.answer1}" th:text="${question.answer1}"></option>
+                    <option th:value="${question.answer2}" th:text="${question.answer2}"></option>
+                    <option th:value="${question.answer3}" th:text="${question.answer3}"></option>
+                    <option th:value="${question.answer4}" th:text="${question.answer4}"></option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Test</button>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
