@@ -30,7 +30,7 @@
         <img [src]="previewImage(course.image)" [alt]="course.name"/>
         <h3>{{course.name}}</h3>
         <p>{{course.description}}</p>
-        <button class="btn btn-primary" (click)="onAddToShoppingCartClick(course)">Add to shopping cart</button>
+        <button class="btn btn-primary" (click)="onAddToShoppingCartClick(course)" style="margin-bottom: 20px;">Add to shopping cart</button>
       </div>
     </div>
     <div class="bg-white" *ngIf="coursesByCategory.length === 0">
