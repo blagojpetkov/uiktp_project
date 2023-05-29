@@ -67,6 +67,10 @@
       height: 100%;
       object-fit: contain;
     }
+
+    ul.no-bullet {
+      list-style-type: none;
+    }
   </style>
 </head>
 <body>
@@ -136,6 +140,14 @@
         </tr>
       </table>
     </form>
+
+    <br>
+    <h3 class="gray">Course ratings</h3>
+    <p class="gray">Average rating score</p>
+    <p class="gray" th:text="${averageScore}"></p>
+    <ul class="no-bullet">
+      <li th:each="comment : ${reviews}" th:text="${comment.text}"></li>
+    </ul>
 
   </div>
   <a th:href="'/courses/add_lesson/' + ${course.id}" class="btn btn-outline-dark">Add a new Lesson</a>

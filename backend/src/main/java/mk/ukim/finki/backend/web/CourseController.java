@@ -1,10 +1,6 @@
 package mk.ukim.finki.backend.web;
 
-import mk.ukim.finki.backend.models.Course;
-import mk.ukim.finki.backend.models.Lesson;
-import mk.ukim.finki.backend.models.ShoppingCart;
-import mk.ukim.finki.backend.models.User;
-import mk.ukim.finki.backend.models.stripe.ChargeRequest;
+import mk.ukim.finki.backend.models.*;
 import mk.ukim.finki.backend.repository.CourseRepository;
 import mk.ukim.finki.backend.service.LessonService;
 import mk.ukim.finki.backend.service.ReviewService;
@@ -159,6 +155,12 @@ public class CourseController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/course_details/{courseId}")
     public String getCourseDetails(@PathVariable Long courseId, Model model){
+        User user = userService.getAuthenticatedUser();
+        List<Review> reviews = reviewService.reviewsByCourse(courseId);
+        model.addAttribute("exists", true);
+        model.addAttribute("reviews", reviews);
+        model.addAttribute("averageScore", reviewService.averageReviewByCourse(courseId));
+
         model.addAttribute("course", courseRepository.findById(courseId).get());
         return "course_details";
     }

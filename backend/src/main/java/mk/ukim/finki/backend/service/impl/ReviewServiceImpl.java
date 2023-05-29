@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -61,5 +63,29 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void delete(Long id) {
         this.reviewRepository.deleteById(id);
+    }
+
+    @Override
+    public Double averageReviewByCourse(Long courseId) {
+        Optional<Course> course = this.courseRepository.findById(courseId);
+        List<Review> reviewList = this.reviewRepository.findAll()
+                .stream()
+                .filter(review -> review.getCourse().equals(course))
+                .collect(Collectors.toList());
+
+        double average = reviewList.stream()
+                .mapToDouble(Review::getGrade)
+                .average()
+                .orElse(0.0);
+
+        return average;
+    }
+
+    @Override
+    public List<Review> reviewsByCourse(Long courseId) {
+        return this.reviewRepository.findAll()
+                .stream()
+                .filter(review -> review.getCourse().getId().equals(courseId))
+                .collect(Collectors.toList());
     }
 }
