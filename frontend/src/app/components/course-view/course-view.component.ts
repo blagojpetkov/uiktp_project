@@ -10,6 +10,7 @@ export class CourseViewComponent implements OnInit {
 
   selectedCourse: any;
   lecture: any;
+  course: any;
   lectures: any[] = [
     {
       name: 'Object 1',
@@ -30,9 +31,15 @@ export class CourseViewComponent implements OnInit {
   ngOnInit(): void {
     this.sharedDataService.courseData$.subscribe(data => {
       this.selectedCourse = data;
+      console.log("This selected course");
+      
+      console.log(this.selectedCourse);
+      
     });
 
   }
+
+  
 }
 
 

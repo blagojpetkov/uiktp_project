@@ -17,14 +17,14 @@ export class CoursesComponent implements OnInit {
   categories: string[] = ['Data Science', 'Web Development', 'Python', 'Drawing', 'Marketing', 'Music', 'Mobile Development']
   activeCategory = this.categories[0];
   coursesByCategory: Course[] = [];
-  course:any;
-  course2:any;
+  course: any;
+  course2: any;
 
   constructor(
     private coursesService: CoursesService,
     private sanitizer: DomSanitizer,
-    private router:Router,
-    private sharedDataService:SharedDataService
+    private router: Router,
+    private sharedDataService: SharedDataService
   ) {
   }
 
@@ -33,45 +33,47 @@ export class CoursesComponent implements OnInit {
     this.coursesService.getCoursesByCategory(this.activeCategory).subscribe(result => {
       this.coursesByCategory = result;
       console.log(result);
-      
+
     })
     this.setUpCourse();
-    
+
   }
 
-  setUpCourse(){
+  setUpCourse() {
     debugger
-    this.course.name="Data Science Course"
+    this.course.name = "Data Science Course"
     // this.course.
-    this.course.category=this.categories[0];
-    this.course.description="Description for course";
+    this.course.category = this.categories[0];
+    this.course.description = "Description for course";
     const enrollmentTemp = new Enrollment;
     enrollmentTemp.course = this.course;
-    enrollmentTemp.enrollmentDate=new Date(2023,5,19);
-    enrollmentTemp.id=0
-    enrollmentTemp.user=new User;
+    enrollmentTemp.enrollmentDate = new Date(2023, 5, 19);
+    enrollmentTemp.id = 0
+    enrollmentTemp.user = new User;
     const enrollments = [];
     enrollments.push(enrollmentTemp);
-    
-    this.course.image= new Blob();
-    this.course.enrollments=enrollments;
-    this.course2 = new Course();
-this.course2.name = "Data Science Course 2";
-this.course2.category = this.categories[0];
-this.course2.description = "Description for course 2";
-const enrollmentTemp2 = new Enrollment();
-enrollmentTemp.course = this.course2;
-enrollmentTemp.enrollmentDate = new Date(2023, 5, 19);
-enrollmentTemp.id = 0;
-enrollmentTemp.user = new User();
-const enrollments2 = [];
-enrollments.push(enrollmentTemp);
 
-this.course2.image = new Blob();
-this.course2.enrollments = enrollments;
+    this.course.image = new Blob();
+    this.course.enrollments = enrollments;
+    this.course2 = new Course();
+    this.course2.name = "Data Science Course 2";
+    this.course2.category = this.categories[0];
+    this.course2.description = "Description for course 2";
+    const enrollmentTemp2 = new Enrollment();
+    enrollmentTemp.course = this.course2;
+    enrollmentTemp.enrollmentDate = new Date(2023, 5, 19);
+    enrollmentTemp.id = 0;
+    enrollmentTemp.user = new User();
+    const enrollments2 = [];
+    enrollments.push(enrollmentTemp);
+
+    this.course2.image = new Blob();
+    this.course2.enrollments = enrollments;
     this.courses.push(this.course2)
     this.courses.push(this.course)
+
     
+    // this.sharedDataService.setCourseData(this.course);
 
   }
   onCategoryChange(category: string) {
@@ -86,8 +88,9 @@ this.course2.enrollments = enrollments;
     return this.sanitizer.bypassSecurityTrustUrl(objectUrl);
   }
 
-  onCourseClicked(courseSelected:any){
+  onCourseClicked(courseSelected: any) {
     this.sharedDataService.setCourseData(courseSelected);
+    // this.sharedDataService.setCourseData(this.course);
     this.router.navigate(['/course-view']);
   }
 }
